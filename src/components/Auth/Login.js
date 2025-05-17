@@ -16,37 +16,73 @@ function Login() {
     }
   };
 
-  return React.createElement(
-    "div",
-    { style: { maxWidth: "400px", margin: "auto", padding: "2rem" } },
-    React.createElement("h2", null, "Giriş Yap"),
-    React.createElement(
-      "input",
-      {
-        type: "email",
-        placeholder: "Email",
-        value: email,
-        onChange: (e) => setEmail(e.target.value),
-        style: { display: "block", marginBottom: "1rem", width: "100%" },
-      }
-    ),
-    React.createElement(
-      "input",
-      {
-        type: "password",
-        placeholder: "Şifre",
-        value: password,
-        onChange: (e) => setPassword(e.target.value),
-        style: { display: "block", marginBottom: "1rem", width: "100%" },
-      }
-    ),
-    React.createElement(
-      "button",
-      { onClick: handleLogin, style: { width: "100%" } },
-      "Giriş"
-    ),
-    error && React.createElement("p", { style: { color: "red" } }, error)
+  return (
+    <div style={styles.container}>
+      <h2 style={styles.title}>Giriş Yap</h2>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={styles.input}
+      />
+      <input
+        type="password"
+        placeholder="Şifre"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        style={styles.input}
+      />
+      <button onClick={handleLogin} style={styles.button}>
+        Giriş
+      </button>
+      {error && <p style={styles.error}>{error}</p>}
+    </div>
   );
 }
 
 export default Login;
+
+// CSS Stilleri
+
+const styles = {
+  container: {
+    maxWidth: "400px",
+    margin: "auto",
+    padding: "2rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    height: "100vh", // Tam ekran ortalamak için
+    boxSizing: "border-box",
+  },
+  title: {
+    textAlign: "center",
+    marginBottom: "2rem",
+    fontSize: "2rem",
+  },
+  input: {
+    fontSize: "1.2rem",
+    padding: "0.8rem",
+    marginBottom: "1.5rem",
+    borderRadius: "6px",
+    border: "1px solid #ccc",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  button: {
+    backgroundColor: "#007bff",
+    color: "white",
+    fontSize: "1.3rem",
+    padding: "0.9rem",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    width: "100%",
+  },
+  error: {
+    marginTop: "1rem",
+    color: "red",
+    textAlign: "center",
+  },
+};
