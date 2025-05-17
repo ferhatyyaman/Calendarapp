@@ -107,16 +107,16 @@ export default CalendarView;
 
 const styles = {
   container: {
-    height: "600px",
-    flex: 2,
+    height: "1000px",
+    flex: "2 1 0",  // flex-shrink ve flex-grow olsun
+    display: "flex",
+    flexDirection: "column",
   },
   calendar: {
     height: "100%",
   },
   reminderBox: {
-    marginTop: "5rem",
-    marginLeft: "auto",
-    marginRight: "auto",
+    marginTop: "6rem",
     padding: "1rem",
     borderRadius: "8px",
     boxShadow: "0 4px 8px rgba(0,0,0,0.1)",

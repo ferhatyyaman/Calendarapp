@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 import { addTodo, fetchTodos, deleteTodo } from "../Firabase/todo";
 
+import "./Dashboard.css";  // CSS dosyasını import et
+
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -45,19 +47,19 @@ function Dashboard() {
   };
 
   return (
-    <div style={styles.container}>
-      <header style={styles.header}>
+    <div className="container">
+      <header className="header">
         <h1>Takvim Uygulaması</h1>
-        <button onClick={handleLogout} style={styles.logoutButton}>
+        <button onClick={handleLogout} className="logoutButton">
           Çıkış Yap
         </button>
       </header>
 
-      <div style={styles.contentWrapper}>
-        <div style={styles.calendarWrapper}>
+      <div className="contentWrapper">
+        <div className="calendarWrapper">
           <Calendar />
         </div>
-        <div style={styles.todoWrapper}>
+        <div className="todoWrapper">
           <AddTodo onAdd={handleAddTodo} />
           <TodoList todos={todos} onDelete={handleDeleteTodo} />
         </div>
@@ -67,34 +69,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-const styles = {
-  container: {
-    padding: "2rem",
-  },
-  header: {
-    marginBottom: "1rem",
-    borderBottom: "1px solid #ccc",
-    paddingBottom: "1rem",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",  // dikey ortalama için
-  },
-  contentWrapper: {
-    display: "flex",
-    padding: "2rem",
-    gap: "2rem",
-    flexWrap: "wrap",
-  },
-  calendarWrapper: {
-    flex: 4,
-    minWidth: "300px",
-  },
-  todoWrapper: {
-    flex: 1,
-    minWidth: "250px",
-  },
-  logoutButton: {
-    marginBottom: "0",
-  },
-};

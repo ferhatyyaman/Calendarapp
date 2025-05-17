@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { loginUser } from "../../Firabase/auth";
+import penguinImg from "../../images/penguen-byt.jpg"; // Resim yolu
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -18,6 +19,7 @@ function Login() {
 
   return (
     <div style={styles.container}>
+      <img src={penguinImg} alt="Penguen" style={styles.penguinImage} />
       <h2 style={styles.title}>Giriş Yap</h2>
       <input
         type="email"
@@ -53,8 +55,16 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    height: "100vh", // Tam ekran ortalamak için
+    height: "90vh",
     boxSizing: "border-box",
+    alignItems: "center", // Resmi ve başlığı ortalamak için
+  },
+  penguinImage: {
+    width: "400px",      // Küçük boyut
+    height: "auto",
+    marginBottom: "1rem",
+    borderRadius: "8px",
+    objectFit: "cover",
   },
   title: {
     textAlign: "center",
