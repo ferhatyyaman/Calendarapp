@@ -49,7 +49,7 @@ export default Login;
 
 const styles = {
   container: {
-    maxWidth: "400px",
+    maxWidth: "350px",
     margin: "auto",
     padding: "2rem",
     display: "flex",
@@ -60,7 +60,7 @@ const styles = {
     alignItems: "center", // Resmi ve başlığı ortalamak için
   },
   penguinImage: {
-    width: "400px",      // Küçük boyut
+    width: "300px",      // Küçük boyut
     height: "auto",
     marginBottom: "1rem",
     borderRadius: "8px",
@@ -72,10 +72,10 @@ const styles = {
     fontSize: "2rem",
   },
   input: {
-    fontSize: "1.2rem",
-    padding: "0.8rem",
+    fontSize: "1.0rem",
+    padding: "9px",
     marginBottom: "1.5rem",
-    borderRadius: "6px",
+    borderRadius: "5px",
     border: "1px solid #ccc",
     width: "100%",
     boxSizing: "border-box",
@@ -84,9 +84,9 @@ const styles = {
     backgroundColor: "#007bff",
     color: "white",
     fontSize: "1.3rem",
-    padding: "0.9rem",
+    padding: "9px",
     border: "none",
-    borderRadius: "6px",
+    borderRadius: "5px",
     cursor: "pointer",
     width: "100%",
   },
