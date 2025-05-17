@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import {fetchTodos, } from "../Firabase/todo";
 import "./Dashboard.css";
 import Header from "../components/Header/header";
+import WelcomePopup from "../components/Pop_up/WelcomePopup";
 
 function Dashboard() {
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
+  const [showPopup, setShowPopup] = useState(true);
 
   useEffect(() => {
     const load = async () => {
@@ -20,6 +22,7 @@ function Dashboard() {
 
   return (
     <div className="container">
+      {showPopup && <WelcomePopup onClose={() => setShowPopup(false)} />}
       <Header />
       <div className="contentWrapper">
         <div className="calendarWrapper">
