@@ -41,6 +41,7 @@ const CalendarView = () => {
           start: new Date(r.date),
           end: new Date(r.date),
           color: userColors[r.uid] || "#000", // uid'ye göre renk ata
+          createdAt: r.createdAt,
         }));
         setEvents(formattedEvents);
       } catch (error) {
@@ -68,6 +69,7 @@ const CalendarView = () => {
           start,
           end: start,
           color: userColors[user.uid] || "#000", // Renk hemen burada atanıyor
+          createdAt: new Date().toISOString(),
         };
   
         setEvents((prevEvents) => [...prevEvents, newEvent]);
@@ -109,19 +111,33 @@ const CalendarView = () => {
           <div key={event.id} style={{
             ...styles.reminderItem,
             backgroundColor: event.color || "#000",
+            height: "100px", 
+            flexDirection: "column",
+            padding: "10px",
+            color: "#fff",
           }}>
-            <span style={styles.reminderText}>
-              {event.title} - {event.start.toLocaleDateString()}
-            </span>
+            <div style={{fontWeight: "bold", fontSize: "1rem",  alignItems: "center",}}>
+                            {event.start.toLocaleDateString()}
+            </div>
+           
+            <div style={{ fontSize: "1.1rem", marginTop: "10px", alignSelf: "flex-start" }}>
+              {event.title}
+            </div>
+
             <button
-              onClick={() => handleDelete(event)}
-              style={styles.deleteButton}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#c0392b")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#e74c3c")}
-            >
-              Sil
-            </button>
+            onClick={() => handleDelete(event)}
+            style={{ ...styles.deleteButton, marginTop: "5px", alignSelf: "flex-end" }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#c0392b")}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#e74c3c")}
+          >
+            Sil
+          </button>
+
+          <div style={{ alignSelf: "flex-end", fontSize: "0.75rem", opacity: 0.8 }}>
+               {new Date(event.createdAt).toLocaleString("tr-TR")}
+              </div>
           </div>
+          
         ))}
       </div>
     </div>
