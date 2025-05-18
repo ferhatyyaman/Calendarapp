@@ -116,9 +116,10 @@ const CalendarView = () => {
             padding: "10px",
             color: "#fff",
           }}>
-            <div style={{fontWeight: "bold", fontSize: "1rem",  alignItems: "center",}}>
-                            {event.start.toLocaleDateString()}
-            </div>
+            
+            <div style={styles.reminderDateText}>
+            {event.start.toLocaleDateString("tr-TR")}
+          </div>
            
             <div style={{ fontSize: "1.1rem", marginTop: "10px", alignSelf: "flex-start" }}>
               {event.title}
@@ -169,9 +170,14 @@ const styles = {
     alignItems: "center",
     marginBottom: "0.75rem",
     padding: "0.5rem 0.75rem",
-    borderRadius: "6px",
+    borderRadius: "5px",
     backgroundColor: "#fff",
     boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+  },
+  reminderDateText: {
+    fontWeight: "bold",
+    borderBottom: "1px solid rgba(255, 255, 255, 0.5)",
+    width: "100%",
   },
   reminderText: {
     fontWeight: "500",
