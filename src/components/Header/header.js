@@ -35,6 +35,7 @@ function Header() {
           <option value="" disabled>Sayfalar</option>
           <option value="dashboard">Ana Takvim</option>
           <option value="plans">Günlük Planlar</option>
+          <option value="special-days">Özel Günler</option> 
         </select>
         <button onClick={handleLogout} className="logoutButton">
           Çıkış Yap

@@ -1,23 +1,29 @@
-import { db } from "./config"; // Firebase Firestore bağlantın
+// addReminder.js
+import { db } from "./config";
 import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { getCurrentUser } from "./auth"; // UID almak için
 
-// Hatırlatma ekleme fonksiyonu
+// Hatırlatma ekle
 export const addReminder = async (reminder) => {
-  const docRef = await addDoc(collection(db, "reminders"), reminder);
-  return docRef.id; // yeni kaydın id'sini döndür
+  const user = await getCurrentUser(); // Giriş yapan kullanıcıyı al
+  const docRef = await addDoc(collection(db, "reminders"), {
+    ...reminder,
+    uid: user.uid, // UID’yi Firestore’a yaz
+  });
+  return docRef.id;
 };
 
-// Firebase'den tüm hatırlatmaları çekme fonksiyonu
+// Hatırlatmaları çek
 export const fetchReminders = async () => {
   const querySnapshot = await getDocs(collection(db, "reminders"));
   let reminders = [];
   querySnapshot.forEach((doc) => {
-    reminders.push({ id: doc.id, ...doc.data() });
+    reminders.push({ id: doc.id, ...doc.data() }); // UID dahil
   });
   return reminders;
 };
 
-// Hatırlatma silme fonksiyonu
+// Hatırlatma sil
 export const deleteReminder = async (id) => {
   await deleteDoc(doc(db, "reminders", id));
 };

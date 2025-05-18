@@ -4,6 +4,7 @@ import Login from "./components/Auth/Login";
 import Dashboard from "./pages/Dashboard";
 import DailyPlans from "./pages/DailyPlans";
 import { auth } from "./Firabase/config";
+import SpecialDays from "./pages/SpecialDays";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Login />} />
         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/" />} />
         <Route path="/plans" element={user ? <DailyPlans /> : <Navigate to="/" />} />
+        <Route path="/special-days" element={user ? <SpecialDays /> : <Navigate to="/" />} />
       </Routes>
     </Router>
   );

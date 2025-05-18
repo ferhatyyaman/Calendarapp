@@ -1,17 +1,31 @@
-import { auth } from "./config";  
-import { signInWithEmailAndPassword } from "firebase/auth";
+// auth.js
+import { auth } from "./config";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
-function loginUser(email, password) {
+// Giriş fonksiyonu
+export function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
+    .then((userCredential) => {
       const user = userCredential.user;
       console.log("Giriş başarılı:", user);
       return user;
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Giriş hatası:", error.message);
       throw error;
     });
 }
 
-export { loginUser };
+// Aktif kullanıcıyı döndüren fonksiyon
+export function getCurrentUser() {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      unsubscribe(); // sadece bir kere çalışsın
+      if (user) {
+        resolve(user); // aktif kullanıcıyı döndür
+      } else {
+        reject("Kullanıcı giriş yapmamış.");
+      }
+    });
+  });
+}

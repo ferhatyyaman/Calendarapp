@@ -1,6 +1,6 @@
 import React from "react";
 
-const TodoList = ({ todos, onDelete }) => {
+const TodoList = ({ todos, onDelete}) => {
   if (todos.length === 0) return <p>Henüz plan eklenmedi.</p>;
 
   return (

@@ -6,6 +6,10 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+import { getCurrentUser } from "../../Firabase/auth";
+import { userColors } from "../../Firabase/userColors";
+
+
 import { addReminder, fetchReminders } from "../../Firabase/addReminder";
 import { deleteReminder } from "../../Firabase/deleteReminder";
 
@@ -26,35 +30,53 @@ const CalendarView = () => {
 
   useEffect(() => {
     const loadReminders = async () => {
-      const remindersFromDb = await fetchReminders();
-      const formattedEvents = remindersFromDb.map((r) => ({
-        id: r.id,
-        title: r.title,
-        start: new Date(r.date),
-        end: new Date(r.date),
-      }));
-      setEvents(formattedEvents);
+      try {
+        const user = await getCurrentUser();
+        const userColor = userColors[user.uid] || "#000"; 
+  
+        const remindersFromDb = await fetchReminders();
+        const formattedEvents = remindersFromDb.map((r) => ({
+          id: r.id,
+          title: r.title,
+          start: new Date(r.date),
+          end: new Date(r.date),
+          color: userColors[r.uid] || "#000", // uid'ye göre renk ata
+        }));
+        setEvents(formattedEvents);
+      } catch (error) {
+        console.error("Hatırlatma yüklenirken hata:", error);
+      }
     };
     loadReminders();
   }, []);
+  
 
   const handleSelectSlot = async ({ start }) => {
     const title = prompt("Hatırlatma başlığı gir:");
     if (title) {
       try {
+        const user = await getCurrentUser(); // UID al
         const newReminderId = await addReminder({
           title,
           date: start.toISOString(),
           createdAt: new Date().toISOString(),
         });
-
-        const newEvent = { id: newReminderId, title, start, end: start };
+  
+        const newEvent = {
+          id: newReminderId,
+          title,
+          start,
+          end: start,
+          color: userColors[user.uid] || "#000", // Renk hemen burada atanıyor
+        };
+  
         setEvents((prevEvents) => [...prevEvents, newEvent]);
       } catch (error) {
         alert("Hatırlatma eklenirken hata oluştu.");
       }
     }
   };
+  
 
   const handleDelete = async (eventToDelete) => {
     try {
@@ -84,7 +106,10 @@ const CalendarView = () => {
         <h3 style={styles.reminderTitle}>Hatırlatmalar</h3>
         {events.length === 0 && <p>Henüz hatırlatma yok.</p>}
         {events.map((event) => (
-          <div key={event.id} style={styles.reminderItem}>
+          <div key={event.id} style={{
+            ...styles.reminderItem,
+            backgroundColor: event.color || "#000",
+          }}>
             <span style={styles.reminderText}>
               {event.title} - {event.start.toLocaleDateString()}
             </span>

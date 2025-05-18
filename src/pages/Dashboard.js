@@ -6,18 +6,28 @@ import "./Dashboard.css";
 import Header from "../components/Header/header";
 import WelcomePopup from "../components/Pop_up/WelcomePopup";
 
+import { getCurrentUser } from "../Firabase/auth";
+import { userColors } from "../Firabase/userColors";
+
+
 function Dashboard() {
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
   const [showPopup, setShowPopup] = useState(true);
 
+  const [userColor, setUserColor] = useState("#000");
+
   useEffect(() => {
     const load = async () => {
+      const user = await getCurrentUser();
+      setUserColor(userColors[user.uid] || "#000");
+  
       const data = await fetchTodos();
       setTodos(data);
     };
     load();
   }, []);
+  
 
 
   return (

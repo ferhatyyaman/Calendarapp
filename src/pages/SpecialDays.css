@@ -1,0 +1,26 @@
+.special-days-container {
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f8;
+    border-radius: 5px;
+    margin: 1px;
+  }
+  
+  .special-days-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .special-days-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .special-days-container li {
+    background: #fff;
+    margin: 0.5rem 0;
+    padding: 1rem;
+    border-left: 4px solid #4c8bf5;
+    border-radius: 5px;
+  }
+  
