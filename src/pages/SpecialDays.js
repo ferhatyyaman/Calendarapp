@@ -24,9 +24,9 @@ function SpecialDays() {
   ];
 
   return (
-    <div className="container">
-        <Header />
+    <div>
         <div className="special-days-container">
+        <Header />
         <h2>Özel Günler</h2>
         <ul>
         {specialDates.map((event, index) => (
